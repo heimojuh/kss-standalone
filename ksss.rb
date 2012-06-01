@@ -10,6 +10,7 @@ require 'erb'
 @styleguide_block = '';
 
 @styles = Kss::Parser.new(@cssdir)
+@_out_buf = '';
 
 File.open('templates/styleguide.html').each {
     |line| @template << line
@@ -18,31 +19,31 @@ File.open('templates/styleguide.html').each {
 File.open('templates/_styleguide_block.html').each {
     |line| @styleguide_block << line
 }
-extend ERB::DefMethod
-def styleguide_block(section, &block)
+
+def styleguide_block(section,element, &block)
     @section = @styles.section(section)
-    puts block.call
-#    @example_html = capture{ block.call }
-    @example_html = block.call
+    @example_html = element
     @output << ERB.new(@styleguide_block,0).result();
 end
 
 def capture(&block)
     out, @_out_buf = @_out_buf, ""
+
     yield
-    @_out_buf
+    block.call.split("\n")[1]
 ensure
     @_out_buf = out
 end
 
-
-
-if ARGV.length
+if ARGV.length != 0
     ARGV.each do |sec|
-        @section = @styles.section(sec)
-        @output << ERB.new(@template, 0).result();
+        #@section = @styles.section(sec)
+        @output << ERB.new(@template, nil, nil, '@output').result();
     end 
+else
+    @output = ERB.new(@template, nil, nil, '@output').result();
 end
+
 
 
 File.open('cssdocs.html', 'w+') {
