@@ -1,14 +1,28 @@
-<% styleguide_block  '1.1' do %>
-<button class="$modifier_class">Example Button</button>
-<% end %>
-<p>This block above was created with a simple template call:</p>
-<pre><code>&lt;% styleguide_block  &#x27;1.1&#x27; do %&gt;
-    &lt;button class=&quot;$modifier_class&quot;&gt;Example Button&lt;/button&gt;
-    &lt;% end %&gt;</code></pre>
-<p>
-Take a look at the source code to this Sinatra app for more details. The goal
-is to remove the pain from creating a styleguide — document your CSS, have
-example HTML in your templates and automate as much as possible.
-</p>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>CSS docs</title>
+        <!-- Styles the documentation is generated from-->
+        <LINK href="css_example/style.css" rel="stylesheet" type="text/css" />
+        <LINK href="css_example/divs.css" rel="stylesheet" type="text/css" />
+        <!-- just some eyecandy for documentation -->
+        <LINK href="templates/styleguide.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
 
-<script src="templates/kss.js"</script>
+        <% styleguide_block '1.1', "<button class='$modifier_class'>Example Button</button>"  do %>
+        <% end %>
+
+        <% styleguide_block '1.2', "<div class='$modifier_class'>Example Div</div>"  do %>
+        <% end %>
+
+
+        <p>
+        Check the templates/styleguide.html on how to introduce new styles to your documentation. Pretty straightforward I'd say.
+        
+        </p>
+
+        <script src="templates/kss.js"></script>
+    </body>
+</html>
