@@ -1,3 +1,19 @@
+
+/*
+ * Your standard div button.
+ *
+ * .black    - Black
+ *
+ * Styleguide 1.2
+ * */
+div { 
+
+}
+div.black { 
+    background-color: black;
+
+}
+
 /*
  * Your standard form button.
  *

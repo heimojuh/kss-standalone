@@ -26,18 +26,9 @@ def styleguide_block(section,element, &block)
     @output << ERB.new(@styleguide_block,0).result();
 end
 
-def capture(&block)
-    out, @_out_buf = @_out_buf, ""
-
-    yield
-    block.call.split("\n")[1]
-ensure
-    @_out_buf = out
-end
-
 if ARGV.length != 0
     ARGV.each do |sec|
-        #@section = @styles.section(sec)
+        @section = @styles.section(sec)
         @output << ERB.new(@template, nil, nil, '@output').result();
     end 
 else
